@@ -56,7 +56,7 @@ class Database{
      * @param array|bool $params Paramètres de la requête
      * @return PDOStatement
      */
-    public static function query($query, $params = false) : ?\PDOStatement
+    public static function query(string $query, array|bool $params = false) : ?\PDOStatement
     {
         $pdo = Database::connect();
         try
@@ -90,7 +90,7 @@ class Database{
      * @param $value
      * @param $token
      */
-    public static function modify($table, $var, $value, $token) : void
+    public static function modify(string $table, string $var, string|int|float $value, string $token) : void
     {
         Database::query("UPDATE $table SET $var = ? WHERE token = '$token'", array($value));
     }
@@ -103,7 +103,7 @@ class Database{
      * @param $value
      * @param $token
      */
-    public static function modifyUser($table, $var, $value, $token) : void
+    public static function modifyUser(string $table, string $var, string|int|float $value, string $token) : void
     {
         if($value==NULL)
         {
