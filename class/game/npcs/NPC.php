@@ -14,117 +14,44 @@ class NPC
     protected string $location;
     protected string $token;
 
-    /**
-     * @return int
-     */
-    public function getId(): int
+    public function getId(): int {return $this->id;}
+    public function setId(int  $id, bool $init=false): void{if($init) $this->id = $id;}
+    
+    public function getName(): string {return $this->name;}
+    public function setName(string  $name, bool $init=false): void
     {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId(int $id): void
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     */
-    public function setName(string $name): void
-    {
+        if(!$init) \basics\Database::modify("npcs", "name", $name, $this->token);
         $this->name = $name;
     }
-
-    /**
-     * @return string
-     */
-    public function getDescription(): string
+    
+    public function getDescription(): string {return $this->description;}
+    public function setDescription(string  $description, bool $init=false): void
     {
-        return $this->description;
-    }
-
-    /**
-     * @param string $description
-     */
-    public function setDescription(string $description): void
-    {
+        if(!$init) \basics\Database::modify("npcs", "description", $description, $this->token);
         $this->description = $description;
     }
-
-    /**
-     * @return string
-     */
-    public function getImage(): string
+    
+    public function getImage(): string {return $this->image;}
+    public function setImage(string  $image, bool $init=false): void
     {
-        return $this->image;
-    }
-
-    /**
-     * @param string $image
-     */
-    public function setImage(string $image): void
-    {
+        if(!$init) \basics\Database::modify("npcs", "image", $image, $this->token);
         $this->image = $image;
     }
-
-    /**
-     * @return int
-     */
-    public function getType(): int
+    
+    public function getType(): int {return $this->type;}
+    public function setType(int  $type, bool $init=false): void
     {
-        return $this->type;
-    }
-
-    /**
-     * @param int $type
-     */
-    public function setType(int $type): void
-    {
+        if(!$init) \basics\Database::modify("npcs", "type", $type, $this->token);
         $this->type = $type;
     }
-
-    /**
-     * @return string
-     */
-    public function getLocation(): string
+    
+    public function getLocation(): string {return $this->location;}
+    public function setLocation(string  $location, bool $init=false): void
     {
-        return $this->location;
-    }
-
-    /**
-     * @param string $location
-     */
-    public function setLocation(string $location): void
-    {
+        if(!$init) \basics\Database::modify("npcs", "location", $location, $this->token);
         $this->location = $location;
     }
-
-    /**
-     * @return string
-     */
-    public function getToken(): string
-    {
-        return $this->token;
-    }
-
-    /**
-     * @param string $token
-     */
-    public function setToken(string $token): void
-    {
-        $this->token = $token;
-    }
-
-
+    
+    public function getToken(): string {return $this->token;}
+    public function setToken(string  $token, bool $init=false): void{if($init) $this->token = $token;}
 }

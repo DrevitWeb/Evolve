@@ -13,10 +13,7 @@ class Item
     protected string $token;
 
     public function getId(): int{return $this->id;}
-    public function setId(int  $id, bool $init=false): void
-    {
-        if($init) $this->id = $id;
-    }
+    public function setId(int  $id, bool $init=false): void{if($init) $this->id = $id;}
 
     public function getName(): string{return $this->name;}
     public function setName(string  $name, bool $init=false): void
@@ -40,10 +37,7 @@ class Item
     }
 
     public function getToken(): string{return $this->token;}
-    public function setToken(string  $token, bool $init=false): void
-    {
-        if($init) $this->token = $token;
-    }
+    public function setToken(string  $token, bool $init=false): void{if($init) $this->token = $token;}
 
 
 }

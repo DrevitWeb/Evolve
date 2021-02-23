@@ -30,7 +30,7 @@ class ObjectivesManager
         return false;
     }
 
-    public function getAchievementKey(string $objectiveToken, string $playerToken) : string
+    public function getAchievementIdentifier(string $objectiveToken, string $playerToken) : string
     {
         //TODO
         return "";

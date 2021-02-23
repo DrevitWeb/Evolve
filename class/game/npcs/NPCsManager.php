@@ -23,4 +23,21 @@ class NPCsManager
         //TODO
         return array();
     }
+
+    public static function getInteractions(string $npcToken) : array
+    {
+        //TODO
+        return array();
+    }
+
+    public static function setInteracted(string $interactionToken, string $playerToken)
+    {
+        //TODO
+    }
+
+    public static function hasInteracted(string $interactionToken, string $playerToken) : bool
+    {
+        //TODO
+        return false;
+    }
 }

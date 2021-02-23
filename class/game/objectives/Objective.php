@@ -13,11 +13,7 @@ class Objective
     protected string $token;
     
     public function getId(): int {return $this->id;}
-    public function setId(int  $id, bool $init=false): void
-    {
-        if(!$init) \basics\Database::modify("objectives", "id", $id, $this->token);
-        $this->id = $id;
-    }
+    public function setId(int  $id, bool $init=false): void{if($init) $this->id = $id;}
 
     public function getName(): string {return $this->name;}
     public function setName(string  $name, bool $init=false): void
@@ -55,11 +51,7 @@ class Objective
     }
 
     public function getToken(): string {return $this->token;}
-    public function setToken(string  $token, bool $init=false): void
-    {
-        if(!$init) \basics\Database::modify("objectives", "token", $token, $this->token);
-        $this->token = $token;
-    }
+    public function setToken(string  $token, bool $init=false): void{if($init) $this->token = $token;}
 
 
 }
