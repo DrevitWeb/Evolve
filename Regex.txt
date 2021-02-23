@@ -1,0 +1,33 @@
+*****
+set([a-zA-Z]*)\(([a-zA-Z]* )\$([a-zA-Z_]*)\): void
+    \{
+        (.*)
+		
+
+set$1($2 \$$3, bool \$init=false): void
+    {
+        if\(!\$init) \\basics\\Database::modify("items", "$3", \$$3, \$this\->token);
+        $4
+*****
+		
+*****
+		
+    /\*\*
+(.*)
+     \*/
+    public function set(.*)
+*****
+		
+*****
+
+    /\*\*
+(.*)
+     \*/
+	 
+*****
+public function get(.*)
+    \{
+        (.*)
+    \}
+	
+public function get$1 {$2}
