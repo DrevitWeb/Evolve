@@ -1,0 +1,178 @@
+.hexagon, .hexagon>.border{
+  width: 10vw;
+  height: 10vw;
+  background: #292929;
+  overflow: hidden;
+  //clip-path: polygon(0% 50%, 25% 95%, 75% 95%, 100% 50%, 75% 5%, 25% 5%);
+  clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.end
+  {
+    transition: all 0.5s ease-out;
+  }
+}
+
+.hexagon .iconContent
+{
+  max-width: 150%;
+  max-height: 150%;
+  height: 100%;
+
+  & *
+  {
+    max-width: 100%;
+    max-height: 100%;
+    height: 100%;
+  }
+}
+
+.hexagon>.border {
+  width: 90%;
+  height: 90%;
+  background-color: #1abc9c;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+}
+
+.hexagon.opened
+{
+  //transform: scale(5);
+  z-index: 100000;
+}
+
+.hexagon>:not(.border),.hexagon>.border>span
+{
+  transition: all .5s;
+}
+
+.hexagon.opened>:not(.border),.hexagon.opened>.border>span
+{
+  transform: rotate(-28.5deg);
+}
+
+.hexagon.animate:hover
+{
+  animation: hexa-pulse 1.5s infinite;
+}
+
+.hexagon.animate.opened:hover
+{
+  animation: none;
+}
+
+.hexagon>.openedContent, .hexagon>.border>.openedContent
+{
+  transition: all .5s;
+  display: none;
+}
+
+.hexagon.opened>.openedContent, .hexagon.opened>.border>.openedContent
+{
+  transition: all .5s;
+  display: block;
+  transform: rotate(29deg) rotateY(180deg);
+  width: 100%;
+  height: 100%;
+}
+
+.hexagon.opened>.iconContent, .hexagon.opened>.border>.iconContent
+{
+  display: none;
+}
+
+.hexagon + .description
+{
+  //opacity: 0;
+  clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+  position: absolute;
+  height: 20vw;
+  width: 20vw;
+  justify-content: center;
+  align-items: center;
+  background: #95a5a6;
+  transition: all 1.5s;
+  z-index: -1;
+  right: 0;
+  top: 150vh;
+  transform: translateY(-20%) rotate(-180deg);
+}
+
+.hexagon.opened + .description
+{
+  opacity: 1;
+  display: flex;
+  top: 60%;
+  right: 8vw;
+  transform: translateY(-20%) rotate(29deg);
+  z-index: 100000000;
+  transition: all 1s;
+
+  & > div
+  {
+    transform: rotate(-29deg);
+  }
+}
+
+@keyframes hexa-pulse {
+  0%
+  {
+    transform: scale(1);
+  }
+  50%
+  {
+    transform: scale(1.2);
+  }
+  100%
+  {
+    transform: scale(1);
+  }
+
+}
+
+.hexa-container
+{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  .left .hexa-row, .left
+  {
+    justify-self: flex-start;
+  }
+
+  .right .hexa-row, .right
+  {
+    justify-self: flex-end;
+  }
+}
+
+.hexa-row
+{
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+}
+
+.hexa_free
+{
+  //filter: drop-shadow(0px 0px 10px rgba(50, 50, 0, 0.5));
+  position: relative;
+  .hexagon
+  {
+    position: absolute;
+  }
+
+  width: 106%;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: visible;
+  margin-left: -6vw;
+}

@@ -1,0 +1,30 @@
+@import "modules/addons";
+@import "modules/boxes";
+@import "modules/buttons";
+@import "modules/form";
+@import "modules/hamburger";
+@import "modules/hexagon";
+@import "modules/html-editor";
+@import "modules/magic_scroll";
+@import "modules/menus";
+@import "modules/panel";
+@import "modules/progress_bar";
+@import "modules/sliders";
+@import "modules/slideshow";
+@import "modules/text";
+
+html, body
+{
+  background: #1abc9c;
+  margin: 0;
+}
+
+*
+{
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+*::-webkit-scrollbar, body::-webkit-scrollbar {
+  display: none;
+}
