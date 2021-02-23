@@ -16,7 +16,7 @@ class Player
     protected int $defended;
     protected string $user;
     protected int $last_play;
-    protected string $from;
+    protected string $origin;
     protected string $token;
 
 
@@ -86,11 +86,11 @@ class Player
         $this->last_play = $last_play;
     }
 
-    public function getFrom(): string{return $this->from;}
-    public function setFrom(string  $from, bool $init=false): void
+    public function getOrigin(): string{return $this->from;}
+    public function setOrigin(string  $origin, bool $init=false): void
     {
-        if(!$init) Database::modify("players", "from", $from, $this->token);
-        $this->from = $from;
+        if(!$init) Database::modify("players", "origin", $origin, $this->token);
+        $this->origin = $origin;
     }
 
     public function getToken(): string{return $this->token;}
