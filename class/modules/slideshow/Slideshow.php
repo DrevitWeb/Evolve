@@ -15,37 +15,31 @@ class Slideshow
     public $id;
 
     public function getName(){return $this->name;}
-    public function setName($name)
+    public function setName($name, $init=false)
     {
-        Database::modify("slideshows", "name", $name, $this->token);
+        if(!$init) Database::modify("slideshows", "name", $name, $this->token);
         $this->name = $name;
     }
 
     public function getType(){return $this->type;}
-    public function setType($type)
+    public function setType($type, $init=false)
     {
-        Database::modify("slideshows", "type", $type, $this->token);
+        if(!$init) Database::modify("slideshows", "type", $type, $this->token);
         $this->type = $type;
     }
 
     public function isSimple(){return $this->simple;}
-    public function setSimple($simple)
+    public function setSimple($simple, $init=false)
     {
-        Database::modify("slideshows", "simple", $simple, $this->token);
+        if(!$init) Database::modify("slideshows", "simple", $simple, $this->token);
         $this->simple = $simple;
     }
 
     public function getToken(){return $this->token;}
-    public function setToken($token)
-    {
-        $this->token = $token;
-    }
+    public function setToken($token, $init=false){if($init) $this->token = $token;}
 
     public function getId(){return $this->id;}
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
+    public function setId($id, $init=false){if(!$init) $this->id = $id;}
 
     public function getSlides()
     {

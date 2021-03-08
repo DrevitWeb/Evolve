@@ -4,31 +4,37 @@
 namespace game\items;
 
 
+use basics\Database;
+use basics\Utils;
 use game\player\Player;
 
 class Market
 {
     static function isInMarket(string $itemToken) : bool
     {
-        //TODO
+        if(Database::query("SELECT * FROM market WHERE item=?", array($itemToken))->rowCount() != 0) return true;
         return false;
     }
 
-    static function getPrice(string $articleToken) : int
+    static function getArticlesForItem(string $itemToken) : array|null
     {
-        //TODO
-        return -1;
+        if(self::isInMarket($itemToken))
+        {
+            $items = Database::query("SELECT * FROM market WHERE item = ?", array($itemToken))->fetchAll();
+            $items = Utils::setObjects($items, "game\items\Article");
+
+            return $items;
+        }
+        return null;
     }
 
-    static function getAmount(string $articleToken) : int
+    static function getArticleFromToken(string $token) : Article|null
     {
-        //TODO
-        return -1;
-    }
-
-    static function getSeller(string $articleToken) : Player|null
-    {
-        //TODO
+        $article = Database::query("SELECT * FROM market WHERE token = ?", array($token))->fetch();
+        if($article)
+        {
+            return Utils::setObject($article, "game\items\Article");
+        }
         return null;
     }
 
@@ -44,15 +50,19 @@ class Market
         return false;
     }
 
-    static function getItem(string $articleToken) : Item|null
-    {
-        //TODO
-        return null;
-    }
-
     static function getArticles() : array
     {
-        //TODO
-        return array();
+        $items = Database::query("SELECT * FROM market");
+        $items = Utils::setObjects($items, "game\items\Article");
+
+        return $items;
+    }
+
+    static function getArticlesOffset(int $offset, int $limit) : array
+    {
+        $items = Database::query("SELECT * FROM market LIMIT ".$offset.", ".$limit);
+        $items = Utils::setObjects($items, "game\items\Article");
+
+        return $items;
     }
 }

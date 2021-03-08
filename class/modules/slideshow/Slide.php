@@ -15,42 +15,36 @@ class Slide
     public $id;
 
     public function getImage(){return $this->image;}
-    public function setImage($image)
+    public function setImage($image, $init=false)
     {
-        Database::modify("slide", "image", $image, $this->token);
+        if(!$init) Database::modify("slide", "image", $image, $this->token);
         $this->image = $image;
     }
 
     public function getRg(){return $this->rg;}
-    public function setRg($rg)
+    public function setRg($rg, $init=false)
     {
-        Database::modify("slide", "rg", $rg, $this->token);
+        if(!$init) Database::modify("slide", "rg", $rg, $this->token);
         $this->rg = $rg;
     }
 
     public function getDescription(){return $this->description;}
-    public function setDescription($description)
+    public function setDescription($description, $init=false)
     {
-        Database::modify("slide", "description", $description, $this->token);
+        if(!$init) Database::modify("slide", "description", $description, $this->token);
         $this->description = $description;
     }
 
     public function getSlideshow(){return $this->slideshow;}
-    public function setSlideshow($slideshow)
+    public function setSlideshow($slideshow, $init=false)
     {
-        Database::modify("slide", "slideshow", $slideshow, $this->token);
+        if(!$init) Database::modify("slide", "slideshow", $slideshow, $this->token);
         $this->slideshow = $slideshow;
     }
 
     public function getToken(){return $this->token;}
-    public function setToken($token)
-    {
-        $this->token = $token;
-    }
+    public function setToken($token, $init=false){if($init) $this->token = $token;}
 
     public function getId(){return $this->id;}
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
+    public function setId($id, $init=false){if($init) $this->id = $id;}
 }

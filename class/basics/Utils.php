@@ -119,21 +119,22 @@ class Utils
         if (class_exists($className))
         {
             $object = new $className();
-            foreach ($array as $key => $value)
+            if($array)
             {
-                $keyWords = explode("_", $key);
-                $funcName = "set";
-                foreach ($keyWords as $key)
-                {
-                    $funcName .= ucfirst($key);
+                foreach ($array as $key => $value) {
+                    $keyWords = explode("_", $key);
+                    $funcName = "set";
+                    foreach ($keyWords as $key) {
+                        $funcName .= ucfirst($key);
+                    }
+                    $func = ($funcName);
+                    if (method_exists($object, $funcName)) {
+                        $object->$func($value, true);
+                    }
                 }
-                $func = ($funcName);
-                if (method_exists($object, $funcName))
-                {
-                    $object->$func($value);
-                }
+                return $object;
             }
-            return $object;
+            return null;
         }
         return null;
     }

@@ -30,15 +30,15 @@ class InMail
         $this->token = $token;
     }
 
-    public function setParent($parent)
+    public function setParent($parent, $init=false)
     {
-        Database::modify("mails", "parent", $parent, $this->token);
+        if(!$init) Database::modify("mails", "parent", $parent, $this->token);
         $this->parent = $parent;
     }
 
-    public function  setRead($read)
+    public function  setRead($read, $init=false)
     {
         $this->mail_read = $read;
-        Database::modify("mails", "mail_read", $read, $this->token);
+        if(!$init) Database::modify("mails", "mail_read", $read, $this->token);
     }
 }
