@@ -1,4 +1,7 @@
 <?php
+
+use JetBrains\PhpStorm\NoReturn;
+
 session_start();
 
 require "autoloader.php";
@@ -38,39 +41,29 @@ else
     header("HTTP/1.1 401 Unauthorized no function provided");
 }
 
-function addPicture()
+#[NoReturn] function loginAdmin($form)
 {
-    if (isset($_FILES['img']))
+    if($form->getValue("passwd") == "Stq5v3fg!")
     {
-        $errors = array();
-        $fileTmpPath = $_FILES['img']['tmp_name'];
-        $fileName = $_FILES['img']['name'];
-        $fileSize = $_FILES['img']['size'];
-        $fileType = $_FILES['img']['type'];
-        $fileNameCmps = explode(".", $fileName);
-        $fileExtension = strtolower(end($fileNameCmps));
-        $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
-        $uploadFileDir = '../../res/img/pages/';
-        $dest_path = $uploadFileDir . $newFileName;
-        if (empty($errors) == true)
-        {
-            if(move_uploaded_file($fileTmpPath, $dest_path))
-            {
-                echo "res/img/pages/".$newFileName;
-            }
-            else
-            {
-                echo'There was some error moving the file to upload directory. Please make sure the upload directory is writable by web server.';
-            }
-        }
+        $admin = new stdClass();
+        $admin->username = $form->getValue("username");
+        \basics\Session::set("admin", $admin);
+        \basics\Session::setAlert("success", "Vous êtes bien connecté.");
+
+        $file = file_put_contents("../../log/admin.txt", "Connexion admin ".$admin->username." at ".date("d.m.y G:i:s")."\n", FILE_APPEND);
+
+
+        die();
+    }
+    else
+    {
+        \basics\Session::setAlert("errors", "Mot de passe erroné!");
+        $file = file_put_contents("../../log/admin.txt", "Connexion échouée ".$form->getValue("username")." at ".date("d.m.y G:i:s")."\n", FILE_APPEND);
+        die();
     }
 }
 
-function createMap()
+function register($form)
 {
-    if(isset($_POST["address"]))
-    {
-        $address = str_replace(" ", "+", preg_replace('/(\s\s+|\t|\n)/', ' ', $_POST["address"]));
-        echo "<iframe frameborder='0' scrolling='no' marginheight='0' marginwidth='0'src='https://maps.google.com/maps?&amp;q=$address&amp;output=embed'></iframe>";
-    }
+
 }

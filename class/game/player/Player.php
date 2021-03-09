@@ -3,6 +3,7 @@
 namespace game\player;
 
 use basics\Database;
+use game\items\ItemsManager;
 
 class Player
 {
@@ -96,8 +97,14 @@ class Player
     public function getToken(): string{return $this->token;}
     public function setToken(string $token, bool $init=false): void{if($init) $this->token = $token;}
 
-    public function getInventory()
+    public function getInventory() : array
     {
-        //TODO
+        $inv = Database::query("SELECT * FROM inventories WHERE player=?", array($this->token))->fetchAll();
+        foreach ($inv as &$item)
+        {
+            $item->item = ItemsManager::getItemByToken($item->item);
+        }
+
+        return $inv;
     }
 }

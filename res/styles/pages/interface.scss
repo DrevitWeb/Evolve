@@ -1,0 +1,27 @@
+html
+{
+  background: url("../../img/bg.png");
+  background-size: cover;
+  font-size: 1vw;
+
+  h1
+  {
+    text-align: center;
+    width: 50%;
+    margin-left: 25%;
+    padding: 5%;
+    box-sizing: border-box;
+    border-radius: 5vw 5vw;
+    background: rgba(255,255,255,.5);
+  }
+
+  #registerForm
+  {
+    background: rgba(255,255,255,.5);
+    width: 50%;
+    margin-left: 25%;
+    padding: 5%;
+    box-sizing: border-box;
+    border-radius: 5vw 5vw;
+  }
+}

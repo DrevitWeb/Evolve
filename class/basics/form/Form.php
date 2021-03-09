@@ -31,7 +31,7 @@ class Form
         $this->token = Utils::generateRandomString(8);
     }
 
-    public function addInput($input)
+    public function addInput($input) : Input
     {
         array_push($this->inputs, $input);
         return $input;

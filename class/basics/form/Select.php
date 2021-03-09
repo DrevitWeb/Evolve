@@ -4,22 +4,24 @@
 namespace basics\form;
 
 
+use JetBrains\PhpStorm\Pure;
+
 class Select extends Input
 {
-    private $options = array();
+    private array $options = array();
     private $selected = null;
 
-    public function __construct($name, $displayName)
+    #[Pure] public function __construct($name, $displayName)
     {
-        Input::__construct("select", $name, $displayName);
+        parent::__construct("select", $name, $displayName);
         return $this;
     }
 
 
-    public function getOptions(){return $this->options;}
+    public function getOptions(): array {return $this->options;}
     public function addOption($name, $value) : Select
     {
-        $this->options[$name] = $value;
+        $this->options[$value] = $name;
         return $this;
     }
 

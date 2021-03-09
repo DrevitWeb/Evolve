@@ -4,12 +4,13 @@
 namespace game\player;
 
 
+use basics\Database;
+
 class Ranking
 {
     static function getRanking() : array
     {
-        //TODO
-        return array();
+        return Database::query("SELECT * FROM ranking")->fetchAll();
     }
 
     static function addPlayer(string $type, string $playerToken) : int

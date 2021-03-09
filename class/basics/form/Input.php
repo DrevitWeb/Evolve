@@ -34,28 +34,28 @@ class Input
     }
 
     public function isAlpha(){return $this->alpha;}
-    public function setAlpha($alpha = true)
+    public function setAlpha($alpha = true) : Input
     {
         $this->alpha = $alpha;
         return $this;
     }
 
     public function isEmail(){return $this->email;}
-    public function setEmail($email = true)
+    public function setEmail($email = true) : Input
     {
         $this->email = $email;
         return $this;
     }
 
     public function isRequired(){return $this->required;}
-    public function setRequired($required = true)
+    public function setRequired($required = true) : Input
     {
         $this->required = $required;
         return $this;
     }
 
     public function isMultiple(){return $this->multiple;}
-    public function setMultiple($multiple = true)
+    public function setMultiple($multiple = true) : Input
     {
         $this->multiple = $multiple;
         return $this;
@@ -64,7 +64,7 @@ class Input
     public function isUnique(){return $this->unique;}
     public function getTable(){return $this->table;}
     public function getField(){return $this->field;}
-    public function setUnique($table, $field, $unique = true)
+    public function setUnique($table, $field, $unique = true) : Input
     {
         $this->unique = $unique;
         $this->table = $table;
@@ -74,7 +74,7 @@ class Input
 
     public function isEquals(){return $this->equals;}
     public function getInput(){return $this->input;}
-    public function setEquals($input, $equals = true)
+    public function setEquals($input, $equals = true) : Input
     {
         $this->input = $input;
         $this->equals = $equals;
@@ -93,7 +93,7 @@ class Input
     public function getValue(){return $this->value;}
     public function setValue($value){$this->value = $value;}
 
-    public function clear()
+    public function clear() : Input
     {
         $this->value = \basics\Utils::convertToBBCODE($this->value);
         $this->value = trim($this->value);
