@@ -1,6 +1,6 @@
 function ajaxRequest(type, request, callback, data = null, formId="form", errorCallback = null, async = true)
 {
-    let xhr;
+    /*let xhr;
     // Create XML HTTP request.
     xhr = new XMLHttpRequest();
     if (type === 'GET' && data != null) {request += '?' + data;}
@@ -24,13 +24,27 @@ function ajaxRequest(type, request, callback, data = null, formId="form", errorC
         }
     };
     // Send XML HTTP request.
-    xhr.send(data);
-}
+    xhr.send(data);*/
 
-function ajaxError(code)
-{
-    if(code === 401) {$("#errors").append($("<div class='alert alert-error'>Vous n'êtes pas autorisé à effectuer cela.</div><br/>"));}
-    else if(code === 401) {$("#errors").append($("<div class='alert alert-error'>Ressource non trouvée</div><br/>"));}
-    else if(code === 500) {$("#errors").append($("<div class='alert alert-error'>Erreur interne au serveur</div><br/>"));}
-    else {$("#errors").append($("<div class='alert alert-error'>Erreur fatale</div><br/>"));}
+    $.ajax({
+        url: request,
+        type: type,
+        data:data,
+        processData: false,
+        contentType: false,
+        complete: function(jqXHR, textStatus) {
+            switch (jqXHR.status) {
+                case 200:
+                case 201:
+                    callback(jqXHR.responseText);
+                    break;
+                case 400:
+                    $("#"+formId).html(jqXHR.responseText);
+                    break;
+                default:
+                    errorCallback(data, jqXHR.responseText);
+                    break;
+            }
+        }
+    });
 }

@@ -5,7 +5,7 @@ function registerForm(id, func, callback, formId="form")
         let form = document.querySelector("form#"+id)
         let formData = new FormData(form);
 
-        ajaxRequest("POST", "./class/controllers/formsController.php?func="+func, function (data) {
+        ajaxRequest("post", "./class/controllers/formsController.php?func="+func, function (data) {
             $(document).off("submit.registered", "#"+id);
             callback(data);
         }, formData, formId);
