@@ -29,6 +29,7 @@
     echo $form->build();
     ?>
 </div>
+<br/>
 <script>
     registerForm("register", "register", function (){
 

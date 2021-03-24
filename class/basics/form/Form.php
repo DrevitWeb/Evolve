@@ -57,7 +57,7 @@ class Form
         }
     }
 
-    public function getValue($name)
+    public function getValue($name) : string
     {
         foreach($this->inputs as $input)
         {

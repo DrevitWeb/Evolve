@@ -8,7 +8,7 @@ use basics\Utils;
 
 class UsersManager
 {
-    public static function registerUser($pseudo, $password, $email, $birth_date, $gender)
+    public static function registerUser($pseudo, $password, $email, $birth_date=null, $gender=null) : User
     {
         $password = Utils::cryptPassword($pseudo, $password);
         $token = Utils::generateRandomString(50);
@@ -18,7 +18,7 @@ class UsersManager
             "INSERT INTO users (pseudo, email, password, avatar, gender, birth_date, sign_date, token, grade) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)"
             ,array($pseudo, $email, $password, "unknown", $gender, $birth_date, time(), $token, 0)
         );
-        return $token;
+        return self::getUserByToken($token);
     }
 
     public static function loginUser($pseudo, $password, $remember=false, $redirect="index", $redirect_error="user/login")

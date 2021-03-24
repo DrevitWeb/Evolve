@@ -389,7 +389,7 @@ $ClassicForm
 .classicForm .form-group label {
   width: 35%;
 }
-.classicForm .form-group input {
+.classicForm .form-group input, .classicForm .form-group select {
   font-size: 1.1vw;
 }
 .classicForm label {
@@ -399,7 +399,7 @@ $ClassicForm
   text-align: right;
   display: block;
 }
-.classicForm label + input {
+.classicForm label + input, .classicForm label + select {
   background: #dce2ff;
   box-sizing: border-box;
   padding-left: 10px;

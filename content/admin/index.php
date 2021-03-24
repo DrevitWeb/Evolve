@@ -23,6 +23,27 @@ else
     <br/>
     <div class="center col-20">
         <a class="btn rounded col-15" href="admin/playersManager">Gestion des joueurs</a>
+        <br/>
+        <br/>
+        <a class="btn rounded col-15" href="admin/itemsManager">Gestion des objets</a>
+        <br>
+        <br>
+        <a class="btn rounded col-15" href="admin/marketManager">Gestion du marché</a>
+        <br>
+        <br>
+        <a class="btn rounded col-15" href="admin/locationsManager">Gestion des lieux</a>
+        <br>
+        <br>
+        <a class="btn rounded col-15" href="admin/objectivesManager">Gestion des objectifs</a>
+        <br>
+        <br>
+        <a class="btn rounded col-15" href="admin/npcsManager">Gestion des PNJ</a>
+        <br>
+        <br>
+        <a class="btn rounded col-15" href="admin/interactionsManager">Gestion des interactions</a>
+        <br>
+        <br>
+        <a class="btn rounded col-15" href="admin/rewardsManager">Gestion des Récompenses</a>
     </div>
 
 <?php

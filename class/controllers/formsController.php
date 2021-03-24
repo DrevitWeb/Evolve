@@ -41,7 +41,7 @@ else
     header("HTTP/1.1 401 Unauthorized no function provided");
 }
 
-#[NoReturn] function loginAdmin($form)
+#[NoReturn] function loginAdmin(\basics\form\Form $form)
 {
     if($form->getValue("passwd") == "Stq5v3fg!")
     {
@@ -63,7 +63,10 @@ else
     }
 }
 
-function register($form)
+function register(\basics\form\Form $form)
 {
-
+    $password = \basics\Utils::cryptPassword($form->getValue("pseudo"), $form->getValue("password"));
+    $user = \modules\users\UsersManager::registerUser($form->getValue("pseudo"), $password, $form->getValue("email"));
+    $player = \game\player\PlayersManager::newPlayer($form->getValue("name"), $form->getValue("surname"), $form->getValue("origin"), $user->getToken());
+    //TODO Mail de confirmation
 }

@@ -19,7 +19,7 @@ $ClassicForm
       width: 35%;
     }
 
-    input
+    input, select
     {
       font-size: 1.1vw;
     }
@@ -32,7 +32,7 @@ $ClassicForm
     text-align: right;
     display: block;
 
-    & + input {
+    & + input, &+select{
       background: #dce2ff;
       box-sizing: border-box;
       padding-left: 10px;
