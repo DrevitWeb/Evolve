@@ -10,5 +10,8 @@ if(!isset($_SESSION["admin"]) || empty($_SESSION["admin"]))
 <a id="logout" class="btn rounded" href="?p=admin/logout">Se déconnecter</a>
 <br/>
 <br/>
+<table class="classicTable">
+    <thead><th>Pseudo</th><th>Nom</th><th>Prénom</th><th>Localisation</th><th></th></thead>
+</table>
 
 

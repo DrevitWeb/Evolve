@@ -11,7 +11,7 @@ class PlayersManager
     static function newPlayer(string $name, string $surname, string $from, string $userToken) : Player
     {
         $token = Utils::generateRandomString(30);
-        $location = ""; //TODO
+        $location = "ORIGIN"; //TODO
         Database::query("INSERT INTO players (name, surname, location, money, state, trapped, defended, user, token, origin) VALUES (?,?,?,?,?,?,?,?,?,?)",array(
             $name,
             $surname,

@@ -20,8 +20,9 @@
     $school->addOption("Autre", "Autre");
 
     $form->addInput($school)->setRequired();
+
     ?>
-<link rel="stylesheet" type="text/css" href="res/styles/pages/interface.css"/>
+<link rel="stylesheet" type="text/css" href="/res/styles/pages/interface.css"/>
 <h1>Enregistrement au programme Evolve</h1>
 <br/>
 <div class="col-10" id="registerForm">
@@ -32,6 +33,6 @@
 <br/>
 <script>
     registerForm("register", "register", function (){
-
+        document.location.reload()
     }, "registerForm");
 </script>

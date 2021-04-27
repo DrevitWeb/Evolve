@@ -41,32 +41,32 @@ else
     header("HTTP/1.1 401 Unauthorized no function provided");
 }
 
-#[NoReturn] function loginAdmin(\basics\form\Form $form)
+function login(\basics\form\Form $form)
 {
-    if($form->getValue("passwd") == "Stq5v3fg!")
+    if(\modules\users\UsersManager::loginUser($form->getValue("pseudo"), $form->getValue("password")))
     {
-        $admin = new stdClass();
-        $admin->username = $form->getValue("username");
-        \basics\Session::set("admin", $admin);
-        \basics\Session::setAlert("success", "Vous êtes bien connecté.");
-
-        $file = file_put_contents("../../log/admin.txt", "Connexion admin ".$admin->username." at ".date("d.m.y G:i:s")."\n", FILE_APPEND);
-
-
-        die();
+        \basics\Session::setAlert("success", "Vous êtes maintenant connecté.");
+        header("HTTP/1.1 200 Login");
     }
     else
     {
-        \basics\Session::setAlert("errors", "Mot de passe erroné!");
-        $file = file_put_contents("../../log/admin.txt", "Connexion échouée ".$form->getValue("username")." at ".date("d.m.y G:i:s")."\n", FILE_APPEND);
-        die();
+        echo "<div class='alert alert-error'>Votre pseudo ou mot de passe est incorrect</div><br/><br/>";
+        header("HTTP/1.1 400 Bad Form");
+        echo $form->getFormCorrected();
     }
 }
 
 function register(\basics\form\Form $form)
 {
-    $password = \basics\Utils::cryptPassword($form->getValue("pseudo"), $form->getValue("password"));
+    $password = $form->getValue("password");
     $user = \modules\users\UsersManager::registerUser($form->getValue("pseudo"), $password, $form->getValue("email"));
-    $player = \game\player\PlayersManager::newPlayer($form->getValue("name"), $form->getValue("surname"), $form->getValue("origin"), $user->getToken());
-    //TODO Mail de confirmation
+    while(\modules\users\UsersManager::getUserByToken($user) == null)
+    {
+        var_dump($user);
+        usleep(100);
+    }
+    $player = \game\player\PlayersManager::newPlayer($form->getValue("name"), $form->getValue("surname"), $form->getValue("origin"), $user);
+    $message = "Bienvenue ".$form->getValue("pseudo")."<br/><br/>";
+    $mail = new \modules\mail\Mail($form->getValue("email"), "Votre inscription au programme Evolve", $message, "mail");
+    \basics\Session::setAlert("success", "Vous êtes maintenant inscrit au programme Evolve... Bonne chance dans votre quête.");
 }

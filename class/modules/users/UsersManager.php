@@ -5,31 +5,32 @@ namespace modules\users;
 use basics\Database;
 use basics\Session;
 use basics\Utils;
+use modules\users\User;
 
 class UsersManager
 {
-    public static function registerUser($pseudo, $password, $email, $birth_date=null, $gender=null) : User
+    public static function registerUser($pseudo, $password, $email, $birth_date=null, $gender=null): string
     {
         $password = Utils::cryptPassword($pseudo, $password);
-        $token = Utils::generateRandomString(50);
+        $token = Utils::generateRandomString(30);
         $birth_date = strtotime($birth_date);
         Database::query
         (
             "INSERT INTO users (pseudo, email, password, avatar, gender, birth_date, sign_date, token, grade) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)"
             ,array($pseudo, $email, $password, "unknown", $gender, $birth_date, time(), $token, 0)
         );
-        return self::getUserByToken($token);
+        return $token;
     }
 
     public static function loginUser($pseudo, $password, $remember=false, $redirect="index", $redirect_error="user/login")
     {
         $password = Utils::cryptPassword($pseudo, $password);
+        echo $password;
 
         $userData = Database::query("SELECT * FROM users WHERE pseudo=? AND password=?", array($pseudo, $password))->fetch();
         if($userData)
         {
-            $user = new User();
-            Utils::setObject($user, $userData);
+            $user = Utils::setObject($userData, "\modules\users\User");
 
             if($remember)
             {
@@ -80,15 +81,12 @@ class UsersManager
         setcookie("yonwa_remember", $user->getPassword().":".$user->getPseudo(), time()+3600*24*30); //Durée du cookie 1 mois
     }
 
-    public static function getUserByToken($token)
+    public static function getUserByToken($token): ?User
     {
         $userData = Database::query("SELECT * FROM users WHERE token=?", array($token))->fetch();
-
         if ($userData)
         {
-            $user = new User();
-            Utils::setObject($user, $userData);
-            return $user;
+            return Utils::setObject($userData, "\modules\users\User");
         }
         else
         {

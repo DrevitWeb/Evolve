@@ -57,6 +57,11 @@
             	echo $content;
             ?>
 		</main>
+
+        <div id="monitor">
+
+        </div>
+
 	</body>
 
     <!-- Fading out when click on alerts -->

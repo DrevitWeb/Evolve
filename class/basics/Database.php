@@ -12,7 +12,7 @@ class Database{
     public static $pdo;
     private static $login = "root";
     private static $password = "rugsyakquiegep0";
-    private static $database = "piste";
+    private static $database = "evolve";
     private static $host = "localhost";
 
     /**
@@ -20,7 +20,7 @@ class Database{
      *
      * @return PDO
      */
-    public static function connect() : Database
+    public static function connect() : PDO
     {
         try
         {
@@ -54,7 +54,7 @@ class Database{
      *
      * @param String $query Requête
      * @param array|bool $params Paramètres de la requête
-     * @return PDOStatement
+     * @return PDOStatement|null
      */
     public static function query(string $query, array|bool $params = false) : ?\PDOStatement
     {

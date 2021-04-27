@@ -9,10 +9,15 @@
 <br/>
 <br/>
 <?php
-if(!isset($_SESSION["admin"]) || empty($_SESSION["admin"]))
+if(\modules\users\UsersManager::getUserConnected() == null)
 {
-    echo "<div class='center'><b>Vous n'êtes pas connecté. Veuillez entrer vos identifiants: </b></div><br/><br/>";
-    echo "<div class='col-20'>".$form->build()."</div>";
+    \basics\Session::setAlert("errors", "Vous devez être connecté en tant qu'administrateur.");
+    \basics\Utils::redirect("/");
+}
+else if(\modules\users\UsersManager::getUserConnected()->getGrade() < 3)
+{
+    \basics\Session::setAlert("errors", "Vous n'avez pas la permission.");
+    \basics\Utils::redirect("/");
 }
 else
 {
